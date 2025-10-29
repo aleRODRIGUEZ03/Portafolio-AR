@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Alexandra Rodriguez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5ede4;
+            --bg-secondary: #fff;
+            --text-primary: #2d3e2d;
+            --text-secondary: #555;
+            --accent-color: #b8a8d8;
+            --accent-gradient: linear-gradient(135deg, #e8f5a3 0%, #b8a8d8 100%);
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #f5ede4;
+            --text-secondary: #c4c4c4;
+            --accent-color: #8b7ba8;
+            --accent-gradient: linear-gradient(135deg, #4a5c3a 0%, #6b5b7b 100%);
+            --shadow: rgba(255,255,255,0.1);
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background-color: var(--bg-primary);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-center a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-center a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-ball {
+            width: 22px;
+            height: 22px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        [data-theme="dark"] .toggle-ball {
+            transform: translateX(30px);
+        }
+
+        .contact-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--text-primary);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        /* Hero About */
+        .hero-about {
+            padding: 5rem 5% 3rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            top: -200px;
+            right: 10%;
+            opacity: 0.1;
+            filter: blur(100px);
+        }
+
+        .hero-about h1 {
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-about p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        /* Languages Section */
+        .languages-section {
+            padding: 5rem 5%;
+            background: var(--bg-secondary);
+        }
+
+        .languages-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .language-card {
+            background: var(--bg-primary);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .language-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        .language-flag {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .language-level {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .toeic-scores {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+
+        .score-value {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            padding: 4rem 5%;
+            background: var(--bg-secondary);
+        }
+
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .intro-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .intro-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .intro-image img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 5%;
+            background: var(--bg-primary);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 5rem 5%;
+            background: var(--bg-secondary);
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category {
+            background: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+       /* Experience Timeline */
+        .experience-section {
+            padding: 5rem 5%;
+            background: var(--bg-primary);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-gradient);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin: 0 3rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px var(--shadow);
+            z-index: 5;
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 6px var(--bg-primary);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .timeline-year {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+
+
+        /* Personal Info Section */
+        .personal-section {
+            padding: 5rem 5%;
+            background: var(--bg-secondary);
+        }
+
+        .personal-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+        }
+
+        .info-details h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-details p {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--shadow);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .logo-container {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-about h1 {
+                font-size: 3rem;
+            }
+
+            .intro-container {
+                flex-direction: column;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(0);
+            }
+
+            .timeline-content {
+                margin: 0 0 0 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="home.html" class="logo-container">
+            <div class="logo-icon">A</div>
+            <span class="logo-text">Alexandra Rodriguez</span>
+        </a>
+        <ul class="nav-center">
+            <li><a href="about.html">About</a></li>
+            <li><a href="galeria.html">Gallery</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()">
+                <div class="toggle-ball">🌙</div>
+            </div>
+            <a href="#contact" class="contact-btn">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero About -->
+    <section class="hero-about">
+        <h1>About Me</h1>
+        <p>Descubre quién soy, mi trayectoria profesional y las habilidades que me han convertido en quien soy hoy.</p>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro-section">
+        <div class="intro-container">
+            <div class="intro-image">
+                <img src="imagenes/ale3.jpg" alt="Alexandra">
+            </div>
+            <div class="intro-text">
+                <h2>¡Hola! Soy Alexandra</h2>
+                <p>Soy <strong>Alexandra Rodrigues</strong>, graduada del Colegio Pedro Pablo Sánchez y del Centro Supérate de La Chorrera. Me apasiona aprender, compartir conocimientos y formar parte de proyectos que impulsen el crecimiento personal y colectivo.</p>
+<p>Me considero una persona <strong>carismática, social y comunicativa</strong>. Disfruto trabajar en equipo, conocer nuevas personas y crear ambientes donde las ideas fluyan con energía positiva y creatividad.</p>
+<p>Creo firmemente en el poder de las habilidades sociales para generar impacto. Cada experiencia, conversación o reto es una oportunidad para seguir creciendo, inspirar a otros y construir algo significativo.</p>
+
+    </section>
+
+<!-- Stats -->
+<section class="stats-section">
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">Certificaciones obtenidas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">2+</div>
+            <div class="stat-label">Proyectos de labor social</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Pasantía completada</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Proyectos académicos destacados</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Skills -->
+<section class="skills-section">
+    <div class="skills-container">
+        <h2 class="section-title">Mis Habilidades</h2>
+        <div class="skills-grid">
+
+            <div class="skill-category">
+                <h3>
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop--v1.png" alt="Icono Tecnología" class="skill-icon">
+                    Tecnológicas
+                </h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Microsoft Excel (Certificada)</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python (Certificada)</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Herramientas Digitales</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/brain.png" alt="Icono Personal" class="skill-icon">
+                    Personales
+                </h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Comunicación Efectiva</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Trabajo en Equipo</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Liderazgo</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/seed-of-life.png" alt="Icono Crecimiento" class="skill-icon">
+                    En Desarrollo
+                </h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Programación Web</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Análisis de Datos</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Innovación y Creatividad</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+.skill-icon {
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+</style>
+
+    <!-- Experience Timeline -->
+<section class="experience-section">
+    <div class="skills-container">
+        <h2 class="section-title">Experiencia y Formación</h2>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h3>Pasantía en TOVA</h3>
+                    <p>Realicé mi pasantía en la empresa <strong>TOVA</strong>, iniciando en el área de contabilidad, donde aprendí sobre gestión y organización de facturas. Luego fui trasladada al área de servicio al cliente, donde adquirí experiencia atendiendo al público, resolviendo consultas y apoyando procesos administrativos.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022 – 2024</div>
+                    <h3>Centro ¡Supérate! – Fundación Alberto Motta</h3>
+                    <p>Formación académica integral con enfoque en inglés, tecnología, liderazgo y valores. Obtuve certificaciones en <strong>Microsoft Excel</strong> y <strong>Python</strong>, además de desarrollar proyectos de impacto social y tecnológico.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2021 – 2024</div>
+                    <h3>Escuela Secundaria Pedro Pablo Sánchez – La Chorrera</h3>
+                    <p>Graduada de educación media ciencias con participación activa en actividades académicas y comunitarias. Destacada por mis habilidades sociales, liderazgo y responsabilidad.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">Certificaciones</div>
+                    <h3>Certificaciones Técnicas</h3>
+                    <p>Certificada en <strong>Microsoft Excel</strong> y <strong>Python</strong>. Desarrollo continuo de competencias digitales, análisis de datos y comunicación profesional.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+            
+       <!-- Languages -->
+    <section class="languages-section">
+        <div class="skills-container">
+            <h2 class="section-title">Idiomas</h2>
+            <div class="languages-grid">
+                <div class="language-card">
+                    <div class="language-flag">🇪🇸</div>
+                    <h3>Español</h3>
+                    <p class="language-level">Nativo</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-flag">🇺🇸</div>
+                    <h3>Inglés</h3>
+                    <p class="language-level">Certificado TOEIC</p>
+                    <div class="toeic-scores">
+                        <div class="score-item">
+                            <span>Listening & Reading</span>
+                            <span class="score-value">✓</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Speaking & Writing</span>
+                            <span class="score-value">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 Alexandra Rodriguez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const ball = document.querySelector('.toggle-ball');
+            
+            html.setAttribute('data-theme', newTheme);
+            ball.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            localStorage.setItem('theme', newTheme);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const ball = document.querySelector('.toggle-ball');
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            ball.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
