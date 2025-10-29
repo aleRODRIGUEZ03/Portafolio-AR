@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandra - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5ede4;
+            --bg-secondary: #fff;
+            --text-primary: #2d3e2d;
+            --text-secondary: #555;
+            --accent-color: #b8a8d8;
+            --accent-gradient: linear-gradient(135deg, #e8f5a3 0%, #b8a8d8 100%);
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #f5ede4;
+            --text-secondary: #c4c4c4;
+            --accent-color: #8b7ba8;
+            --accent-gradient: linear-gradient(135deg, #4a5c3a 0%, #6b5b7b 100%);
+            --shadow: rgba(255,255,255,0.1);
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background-color: var(--bg-primary);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-center a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-center a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .toggle-ball {
+            width: 22px;
+            height: 22px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        [data-theme="dark"] .toggle-ball {
+            transform: translateX(30px);
+        }
+
+        .contact-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--text-primary);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 5% 2rem 5%;
+            min-height: 85vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+            opacity: 0.1;
+            filter: blur(80px);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 6rem;
+            color: var(--text-primary);
+            margin-bottom: 0;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .image-container {
+            position: relative;
+            width: 500px;
+            height: 600px;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .background-shape {
+            position: absolute;
+            width: 500px;
+            height: 600px;
+            background: var(--accent-gradient);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            z-index: 1;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+        }
+
+        .hero-image img {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 50%;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 20px 60px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 5%;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            bottom: -200px;
+            left: -200px;
+            opacity: 0.05;
+            filter: blur(100px);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 3.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--accent-gradient);
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 1rem;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .cv-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--shadow);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links p {
+            font-size: 1rem;
+            opacity: 0.8;
+            color: var(--text-secondary);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--shadow);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                padding: 1.5rem 5%;
+            }
+
+            .logo-container {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+
+            .nav-center {
+                gap: 2rem;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 3rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .image-container {
+                width: 350px;
+                height: 450px;
+            }
+
+            .background-shape {
+                width: 350px;
+                height: 450px;
+            }
+
+            .hero-image img {
+                width: 320px;
+                height: 320px;
+            }
+
+            .about-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="#" class="logo-container">
+            <div class="logo-icon">A</div>
+            <span class="logo-text">Alexandra Rodriguez</span>
+        </a>
+        <ul class="nav-center">
+            <li><a href="about.html">About</a></li>
+            <li><a href="galeria.html">Gallery</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="theme-toggle" onclick="toggleTheme()">
+                <div class="toggle-ball">🌙</div>
+            </div>
+            <a href="#contact" class="contact-btn">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Hey, I'm Ale</h1>
+            <p class="subtitle">I create creative solutions that inspire. Explore my work and discover what we can achieve together.</p>
+        </div>
+        <div class="hero-image">
+            <div class="image-container">
+                <div class="background-shape"></div>
+                <img src="imagenes/ale.jpeg" alt="Alexandra">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="imagenes/ale4.jpg" alt="Conóceme">
+            </div>
+            <div class="about-text">
+                <h2>¿Por qué trabajar conmigo?</h2>
+                <p>Mi formación académica combinada con experiencia práctica en pasantías me ha preparado para enfrentar desafíos reales.</p>
+                <p>Soy apasionada, dedicada y siempre estoy buscando aprender algo nuevo. Mi adaptabilidad y entusiasmo por crecer profesionalmente me convierten en una excelente adición a cualquier equipo.</p>
+                <p>¿Buscas alguien con habilidades técnicas, creatividad y ganas de hacer la diferencia? Estoy lista para contribuir y crecer junto a tu proyecto.</p>
+                <a href="TU_LINK_CURRICULUM_AQUI" class="cv-button">Ver Currículum</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="mailto:alexandra@email.com">Email</a>
+            </div>
+            <div class="social-links">
+                <p>Sígueme en Instagram • LinkedIn • Behance</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Alexandra Rodriguez. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const ball = document.querySelector('.toggle-ball');
+            
+            html.setAttribute('data-theme', newTheme);
+            ball.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            localStorage.setItem('theme', newTheme);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const ball = document.querySelector('.toggle-ball');
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            ball.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
